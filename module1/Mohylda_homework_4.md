@@ -1,7 +1,8 @@
 # Домашнє завдання №4. Пакети, сервіси та журнали
 
 **Студент:** Mohylda Sasha  
-**Репозиторій:** github.com/sashamohylda
+**Репозиторій:** github.com/sashamohylda  
+**Середовище:** Ubuntu 22.04 (Docker контейнер на macOS)
 
 ---
 
@@ -10,19 +11,34 @@
 ### 1.1 Оновлення списку пакетів
 
 ```bash
-sudo apt update
+apt update
 ```
 
 **Вивід:**
 ```
-Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
-Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
-Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
-Fetched 238 kB in 2s (119 kB/s)
+Get:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease [270 kB]
+Get:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [128 kB]
+Get:3 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease [127 kB]
+Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [129 kB]
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy/restricted arm64 Packages [24.2 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 Packages [1758 kB]
+Get:7 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse arm64 Packages [224 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 Packages [17.2 MB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted arm64 Packages [7036 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 Packages [1675 kB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse arm64 Packages [47.7 kB]
+Get:12 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 Packages [4012 kB]
+Get:13 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main arm64 Packages [83.5 kB]
+Get:14 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe arm64 Packages [33.7 kB]
+Get:15 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse arm64 Packages [41.2 kB]
+Get:16 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted arm64 Packages [6844 kB]
+Get:17 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 Packages [3694 kB]
+Get:18 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 Packages [1373 kB]
+Fetched 44.7 MB in 8s (5909 kB/s)
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
-All packages are up to date.
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
 ```
 
 ---
@@ -30,7 +46,7 @@ All packages are up to date.
 ### 1.2 Встановлення утиліти `tree`
 
 ```bash
-sudo apt install tree -y
+apt install tree -y
 ```
 
 **Вивід:**
@@ -40,12 +56,14 @@ Building dependency tree... Done
 Reading state information... Done
 The following NEW packages will be installed:
   tree
-0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
-Need to get 47.9 kB of archives.
-After this operation, 117 kB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 tree amd64 2.0.2-1 [47.9 kB]
-Fetched 47.9 kB in 0s (203 kB/s)
+0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+Need to get 47.2 kB of archives.
+After this operation, 108 kB of additional disk space will be used.
+Get:1 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 tree arm64 2.0.2-1 [47.2 kB]
+Fetched 47.2 kB in 0s (169 kB/s)
 Selecting previously unselected package tree.
+(Reading database ... 4387 files and directories currently installed.)
+Preparing to unpack .../tree_2.0.2-1_arm64.deb ...
 Unpacking tree (2.0.2-1) ...
 Setting up tree (2.0.2-1) ...
 ```
@@ -64,8 +82,8 @@ Desired=Unknown/Install/Remove/Purge/Hold
 | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
 |/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
 ||/ Name           Version      Architecture Description
-+++-==============-============-============-=================================
-ii  tree           2.0.2-1      amd64        recursive directory listing command
++++-==============-============-============-=============================================
+ii  tree           2.0.2-1      arm64        displays an indented directory tree, in color
 ```
 
 ```bash
@@ -74,8 +92,7 @@ tree --version
 
 **Вивід:**
 ```
-tree v2.0.2 (c) 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher,
-Florian Sesser, Kyosuke Tokoro
+tree v2.0.2 (c) 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro
 ```
 
 ---
@@ -83,7 +100,7 @@ Florian Sesser, Kyosuke Tokoro
 ### 1.4 Видалення пакету
 
 ```bash
-sudo apt remove tree -y
+apt remove tree -y
 ```
 
 **Вивід:**
@@ -93,14 +110,13 @@ Building dependency tree... Done
 Reading state information... Done
 The following packages will be REMOVED:
   tree
-0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
-After this operation, 117 kB disk space will be freed.
-(Reading database ... 75432 files and directories currently installed.)
+0 upgraded, 0 newly installed, 1 to remove and 3 not upgraded.
+After this operation, 108 kB disk space will be freed.
+(Reading database ... 4395 files and directories currently installed.)
 Removing tree (2.0.2-1) ...
 ```
 
 ```bash
-# Перевірка, що пакет видалено
 dpkg -l tree
 ```
 
@@ -111,31 +127,21 @@ dpkg-query: no packages found matching tree
 
 ---
 
-## Завдання 2. Керування сервісами через systemctl
+## Завдання 2. Керування сервісами
 
-### 2.1 Перевірка статусу сервісу `ssh`
+> У Docker-контейнері systemd недоступний, тому використовується команда `service`
+> та `update-rc.d` для автозавантаження — стандартні інструменти Ubuntu.
+
+### 2.1 Перевірка статусу сервісу `cron`
 
 ```bash
-sudo systemctl status ssh
+apt install cron -y
+service cron status
 ```
 
 **Вивід:**
 ```
-● ssh.service - OpenBSD Secure Shell server
-     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
-     Active: active (running) since Mon 2026-04-13 18:45:12 UTC; 1h 23min ago
-       Docs: man:sshd(8)
-             man:sshd_config(5)
-    Process: 892 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
-   Main PID: 910 (sshd)
-      Tasks: 1 (limit: 4611)
-     Memory: 5.8M
-        CPU: 312ms
-     CGroup: /system.slice/ssh.service
-             └─910 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
-
-Apr 13 18:45:12 ubuntu systemd[1]: Starting OpenBSD Secure Shell server...
-Apr 13 18:45:12 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
+ * cron is running
 ```
 
 ---
@@ -143,147 +149,114 @@ Apr 13 18:45:12 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ### 2.2 Зупинка сервісу
 
 ```bash
-sudo systemctl stop ssh
-```
-
-```bash
-# Перевірка, що сервіс зупинено
-sudo systemctl status ssh
+service cron stop
 ```
 
 **Вивід:**
 ```
-○ ssh.service - OpenBSD Secure Shell server
-     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
-     Active: inactive (dead) since Mon 2026-04-13 20:09:55 UTC; 3s ago
-    Process: 910 ExecStart=/usr/sbin/sshd -D $SSHD_OPTS (code=exited, status=0/SUCCESS)
-   Main PID: 910 (code=exited, status=0/SUCCESS)
-
-Apr 13 20:09:55 ubuntu systemd[1]: Stopping OpenBSD Secure Shell server...
-Apr 13 20:09:55 ubuntu systemd[1]: ssh.service: Deactivated successfully.
-Apr 13 20:09:55 ubuntu systemd[1]: Stopped OpenBSD Secure Shell server.
+ * Stopping periodic command scheduler cron    [ OK ]
 ```
 
-Сервіс має статус **inactive (dead)** — зупинено успішно.
+```bash
+service cron status
+```
+
+**Вивід:**
+```
+ * cron is not running
+```
+
+Сервіс успішно зупинено.
 
 ---
 
 ### 2.3 Повторний запуск сервісу
 
 ```bash
-sudo systemctl start ssh
-```
-
-```bash
-# Перевірка статусу після запуску
-sudo systemctl status ssh
+service cron start
 ```
 
 **Вивід:**
 ```
-● ssh.service - OpenBSD Secure Shell server
-     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
-     Active: active (running) since Mon 2026-04-13 20:10:18 UTC; 2s ago
-   Main PID: 1247 (sshd)
-      Tasks: 1 (limit: 4611)
-     Memory: 4.1M
-        CPU: 18ms
-     CGroup: /system.slice/ssh.service
-             └─1247 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
-
-Apr 13 20:10:18 ubuntu systemd[1]: Starting OpenBSD Secure Shell server...
-Apr 13 20:10:18 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
+ * Starting periodic command scheduler cron    [ OK ]
 ```
 
-Сервіс знову має статус **active (running)**.
+Сервіс знову активний.
 
 ---
 
 ### 2.4 Додавання сервісу в автозавантаження
 
 ```bash
-sudo systemctl enable ssh
+update-rc.d cron enable
 ```
 
 **Вивід:**
 ```
-Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
-Executing: /lib/systemd/systemd-sysv-install enable ssh
+(немає виводу — команда виконана успішно)
 ```
-
-```bash
-# Перевірка: у рядку Loaded має бути "enabled"
-sudo systemctl is-enabled ssh
-```
-
-**Вивід:**
-```
-enabled
-```
-
-Сервіс `ssh` успішно додано в автозавантаження.
 
 ---
 
 ## Завдання 3. Робота з логами
 
-### 3.1 Останні 10 рядків файлу syslog
+### 3.1 Останні рядки файлу syslog
 
 ```bash
-cd /var/log
-tail -n 10 syslog
+tail -n 10 /var/log/syslog
 ```
 
 **Вивід:**
 ```
-Apr 13 20:10:18 ubuntu systemd[1]: Starting OpenBSD Secure Shell server...
-Apr 13 20:10:18 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
-Apr 13 20:10:20 ubuntu kernel: [12345.678] NET: Registered PF_INET6 protocol family
-Apr 13 20:10:21 ubuntu systemd-resolved[654]: Using system hostname 'ubuntu'.
-Apr 13 20:10:22 ubuntu cron[891]: (CRON) INFO (pidfile fd = 3)
-Apr 13 20:10:22 ubuntu cron[891]: (CRON) INFO (Running @reboot jobs)
-Apr 13 20:10:25 ubuntu systemd[1]: systemd-fsck@dev-sda1.service: Deactivated successfully.
-Apr 13 20:10:28 ubuntu dbus-daemon[789]: [system] Activating via systemd: service name='org.freedesktop.hostname1'
-Apr 13 20:10:29 ubuntu systemd[1]: Starting User Login Management...
-Apr 13 20:10:30 ubuntu systemd[1]: Started User Login Management.
+Apr 13 16:50:23 dd79d5fd97b5 rsyslogd: imklog: cannot open kernel log (/proc/kmsg): Operation not permitted.
+Apr 13 16:50:23 dd79d5fd97b5 rsyslogd: activation of module imklog failed [v8.2112.0]
+Apr 13 16:50:23 dd79d5fd97b5 rsyslogd: rsyslogd's groupid changed to 102
+Apr 13 16:50:23 dd79d5fd97b5 rsyslogd: rsyslogd's userid changed to 101
+Apr 13 16:50:23 dd79d5fd97b5 rsyslogd: [origin software="rsyslogd" swVersion="8.2112.0" x-pid="634"] start
+Apr 13 16:50:56 dd79d5fd97b5 root: test message from homework
+Apr 13 16:51:55 dd79d5fd97b5 root: test error message for homework
+Apr 13 16:52:25 dd79d5fd97b5 cron[675]: (CRON) INFO (pidfile fd = 3)
+Apr 13 16:52:25 dd79d5fd97b5 cron[676]: (CRON) INFO (Skipping @reboot jobs -- not system startup)
+Apr 13 16:52:25 dd79d5fd97b5 root: cron service started manually for homework
 ```
 
 ---
 
-### 3.2 Перегляд помилок через journalctl
+### 3.2 Перегляд помилок (аналог journalctl -p err)
 
 ```bash
-journalctl -p err
+logger -p err "test error message for homework"
+grep -i "error\|err" /var/log/syslog
 ```
 
 **Вивід:**
 ```
-Apr 13 18:44:55 ubuntu kernel: ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.LPCB.EC], AE_NOT_FOUND (20210730/dswload2-160)
-Apr 13 18:44:55 ubuntu kernel: ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20210730/psobject-220)
-Apr 13 18:45:01 ubuntu systemd-udevd[401]: sda: Process '/usr/bin/unshare -m /usr/lib/udev/drives --device /dev/sda' failed with exit code 1.
-Apr 13 19:02:11 ubuntu snapd[921]: overlord/snapstate: snap "core20" has no updates available
-Apr 13 20:08:44 ubuntu su[2341]: FAILED SU (to root) user on pts/0
+Apr 13 16:51:55 dd79d5fd97b5 root: test error message for homework
 ```
+
+> У Docker-контейнері `journalctl` недоступний, тому використовується `logger -p err`
+> для запису повідомлення з рівнем err та `grep` для фільтрації логів.
 
 ---
 
-### 3.3 Пошук записів про запуск/зупинку сервісу ssh
+### 3.3 Пошук записів про запуск/зупинку сервісу cron
 
 ```bash
-journalctl -u ssh | grep -E "Started|Stopped|Starting|Stopping"
+service cron stop
+service cron start
+logger "cron service started manually for homework"
+grep -i "cron" /var/log/syslog
 ```
 
 **Вивід:**
 ```
-Apr 13 18:45:12 ubuntu systemd[1]: Starting OpenBSD Secure Shell server...
-Apr 13 18:45:12 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
-Apr 13 20:09:55 ubuntu systemd[1]: Stopping OpenBSD Secure Shell server...
-Apr 13 20:09:55 ubuntu systemd[1]: Stopped OpenBSD Secure Shell server.
-Apr 13 20:10:18 ubuntu systemd[1]: Starting OpenBSD Secure Shell server...
-Apr 13 20:10:18 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
+Apr 13 16:52:25 dd79d5fd97b5 cron[675]: (CRON) INFO (pidfile fd = 3)
+Apr 13 16:52:25 dd79d5fd97b5 cron[676]: (CRON) STARTUP (fork ok)
+Apr 13 16:52:25 dd79d5fd97b5 cron[676]: (CRON) INFO (Skipping @reboot jobs -- not system startup)
+Apr 13 16:52:25 dd79d5fd97b5 root: cron service started manually for homework
 ```
 
-Журнал фіксує обидві події: зупинку (`20:09:55`) та повторний запуск (`20:10:18`) з Завдання 2.
+Журнал зафіксував запуск сервісу cron о `16:52:25`.
 
 ---
 
@@ -292,34 +265,23 @@ Apr 13 20:10:18 ubuntu systemd[1]: Started OpenBSD Secure Shell server.
 ### 4.1 Створення bash-скрипту
 
 ```bash
-nano ~/myscript.sh
-```
-
-**Вміст файлу `~/myscript.sh`:**
-
-```bash
+cat > ~/myscript.sh << 'EOF'
 #!/bin/bash
-# Скрипт щосекунди записує поточну дату у файл
-
 while true; do
     echo "$(date '+%Y-%m-%d %H:%M:%S') — скрипт працює" >> ~/mylog.txt
     sleep 1
 done
+EOF
 ```
 
 ```bash
-# Зробити скрипт виконуваним
 chmod +x ~/myscript.sh
-```
-
-```bash
-# Перевірка прав доступу
 ls -l ~/myscript.sh
 ```
 
 **Вивід:**
 ```
--rwxr-xr-x 1 user user 112 Apr 13 20:12:00 /home/user/myscript.sh
+-rwxr-xr-x 1 root root 129 Apr 13 16:52 /root/myscript.sh
 ```
 
 ---
@@ -327,93 +289,62 @@ ls -l ~/myscript.sh
 ### 4.2 Створення файлу конфігурації сервісу
 
 ```bash
-sudo nano /etc/systemd/system/myscript.service
-```
-
-**Вміст файлу `/etc/systemd/system/myscript.service`:**
-
-```ini
+cat > /etc/systemd/system/myscript.service << 'EOF'
 [Unit]
 Description=My custom date logger script
 After=network.target
 
 [Service]
 Type=simple
-User=user
-ExecStart=/home/user/myscript.sh
+User=root
+ExecStart=/root/myscript.sh
 Restart=always
 RestartSec=3
 
 [Install]
 WantedBy=multi-user.target
+EOF
 ```
 
 ---
 
-### 4.3 Запуск сервісу та перевірка статусу
+### 4.3 Запуск скрипту та перевірка
+
+> У Docker systemd недоступний, тому скрипт запускається як фоновий процес.
+> Файл `.service` створено відповідно до умови завдання.
 
 ```bash
-# Перезавантажити демон systemd, щоб він побачив новий сервіс
-sudo systemctl daemon-reload
-```
-
-```bash
-# Запуск сервісу
-sudo systemctl start myscript.service
-```
-
-```bash
-# Перевірка статусу
-sudo systemctl status myscript.service
+~/myscript.sh &
 ```
 
 **Вивід:**
 ```
-● myscript.service - My custom date logger script
-     Loaded: loaded (/etc/systemd/system/myscript.service; disabled; vendor preset: enabled)
-     Active: active (running) since Mon 2026-04-13 20:13:05 UTC; 4s ago
-   Main PID: 2891 (myscript.sh)
-      Tasks: 2 (limit: 4611)
-     Memory: 1.1M
-        CPU: 8ms
-     CGroup: /system.slice/myscript.service
-             └─2891 /bin/bash /home/user/myscript.sh
-
-Apr 13 20:13:05 ubuntu systemd[1]: Started My custom date logger script.
+[1] 684
 ```
-
-Сервіс має статус **active (running)**.
 
 ---
 
 ### 4.4 Перевірка запису даних у файл
 
 ```bash
-# Зачекати кілька секунд та переглянути вміст файлу
 sleep 5 && cat ~/mylog.txt
 ```
 
 **Вивід:**
 ```
-2026-04-13 20:13:05 — скрипт працює
-2026-04-13 20:13:06 — скрипт працює
-2026-04-13 20:13:07 — скрипт працює
-2026-04-13 20:13:08 — скрипт працює
-2026-04-13 20:13:09 — скрипт працює
+2026-04-13 16:53:16 — скрипт працює
+2026-04-13 16:53:17 — скрипт працює
+2026-04-13 16:53:18 — скрипт працює
+2026-04-13 16:53:19 — скрипт працює
+2026-04-13 16:53:20 — скрипт працює
+2026-04-13 16:53:21 — скрипт працює
+2026-04-13 16:53:22 — скрипт працює
+2026-04-13 16:53:23 — скрипт працює
+2026-04-13 16:53:24 — скрипт працює
+2026-04-13 16:53:25 — скрипт працює
 ```
 
-Дані записуються коректно — кожну секунду з'являється новий рядок.
-
-```bash
-# Додатково: додати в автозавантаження
-sudo systemctl enable myscript.service
-```
-
-**Вивід:**
-```
-Created symlink /etc/systemd/system/multi-user.target.wants/myscript.service
-→ /etc/systemd/system/myscript.service.
-```
+Скрипт працює коректно — кожну секунду записує новий рядок з поточною датою.
 
 ---
 
@@ -421,12 +352,13 @@ Created symlink /etc/systemd/system/multi-user.target.wants/myscript.service
 
 | Завдання | Виконано | Результат |
 |----------|----------|-----------|
-| 1. Менеджери пакетів | ✅ | Пакет `tree` встановлено (v2.0.2) та видалено |
-| 2. Керування сервісами | ✅ | Сервіс `ssh` зупинено, запущено, додано в автозавантаження |
-| 3. Робота з логами | ✅ | Переглянуто syslog, помилки через `journalctl -p err`, знайдено записи про ssh |
-| 4. Власний сервіс | ✅ | Скрипт `myscript.sh` запущено як системний сервіс, дані пишуться щосекунди |
+| 1. Менеджери пакетів | ✅ | Пакет `tree` (v2.0.2) встановлено через `apt` та успішно видалено |
+| 2. Керування сервісами | ✅ | Сервіс `cron` зупинено, запущено, додано в автозавантаження |
+| 3. Робота з логами | ✅ | Переглянуто `/var/log/syslog`, знайдено помилки та записи про cron |
+| 4. Власний сервіс | ✅ | Скрипт `myscript.sh` запущено, дані записуються щосекунди |
 
-- `apt` — стандартний менеджер пакетів Ubuntu/Debian для встановлення та видалення програм.  
-- `systemctl` дозволяє керувати сервісами: `start`, `stop`, `enable`, `status`.  
-- `journalctl` — централізований інструмент перегляду системних журналів з фільтрацією за рівнем (`-p err`) та юнітом (`-u ssh`).  
-- Власний сервіс systemd складається з `.service` файлу з секціями `[Unit]`, `[Service]`, `[Install]`.
+- `apt` — стандартний менеджер пакетів Ubuntu/Debian для встановлення та видалення програм.
+- `service` — команда керування сервісами, доступна у контейнерному середовищі без systemd.
+- `update-rc.d` — інструмент для керування автозавантаженням сервісів у Ubuntu.
+- Системні журнали у `/var/log/syslog` фіксують всі події: запуск сервісів, помилки, повідомлення.
+- Власний сервіс може бути описаний `.service` файлом для systemd або запущений як фоновий процес.
