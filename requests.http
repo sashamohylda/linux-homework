@@ -1,0 +1,139 @@
+### Базова URL
+@baseUrl = http://localhost:3000
+
+### ─────────────────────────────────────────
+### GET /announcements — без параметрів
+### ─────────────────────────────────────────
+GET {{baseUrl}}/announcements
+Content-Type: application/json
+
+###
+
+### GET /announcements — пошук по назві
+GET {{baseUrl}}/announcements?search=ноутбук
+Content-Type: application/json
+
+###
+
+### GET /announcements — сортування від старіших + пагінація
+GET {{baseUrl}}/announcements?sort=oldest&page=1
+Content-Type: application/json
+
+###
+
+### GET /announcements — пошук + новіші + сторінка 2
+GET {{baseUrl}}/announcements?search=продам&sort=newest&page=2
+Content-Type: application/json
+
+###
+
+### ─────────────────────────────────────────
+### GET /announcements/:id — існуючий ID
+### ─────────────────────────────────────────
+GET {{baseUrl}}/announcements/1
+Content-Type: application/json
+
+###
+
+### GET /announcements/:id — неіснуючий ID → 404
+GET {{baseUrl}}/announcements/99999
+Content-Type: application/json
+
+###
+
+### ─────────────────────────────────────────
+### POST /announcements — валідні дані → 201
+### ─────────────────────────────────────────
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+
+{
+  "title": "Продам ноутбук ASUS",
+  "description": "Відмінний стан, 16GB RAM, є зарядка",
+  "price": 18000,
+  "category": "sale",
+  "contactInfo": "0991234567"
+}
+
+###
+
+### POST /announcements — невалідні дані → 400
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+
+{
+  "title": "Hi",
+  "description": "short",
+  "price": -100,
+  "category": "invalid_category",
+  "contactInfo": "123"
+}
+
+###
+
+### POST /announcements — ще один валідний запис
+POST {{baseUrl}}/announcements
+Content-Type: application/json
+
+{
+  "title": "Надаю послуги репетитора з математики",
+  "description": "Досвід 5 років, підготовка до ЗНО та ДПА",
+  "price": 500,
+  "category": "service",
+  "contactInfo": "teacher@gmail.com"
+}
+
+###
+
+### ─────────────────────────────────────────
+### PATCH /announcements/:id — часткове оновлення
+### ─────────────────────────────────────────
+PATCH {{baseUrl}}/announcements/1
+Content-Type: application/json
+
+{
+  "price": 16500,
+  "title": "Продам ноутбук ASUS (торг)"
+}
+
+###
+
+### PATCH /announcements/:id — оновлення одного поля
+PATCH {{baseUrl}}/announcements/1
+Content-Type: application/json
+
+{
+  "contactInfo": "0997654321"
+}
+
+###
+
+### PATCH /announcements/:id — порожнє тіло → 400
+PATCH {{baseUrl}}/announcements/1
+Content-Type: application/json
+
+{}
+
+###
+
+### PATCH /announcements/:id — неіснуючий ID → 404
+PATCH {{baseUrl}}/announcements/99999
+Content-Type: application/json
+
+{
+  "price": 100
+}
+
+###
+
+### ─────────────────────────────────────────
+### DELETE /announcements/:id
+### ─────────────────────────────────────────
+DELETE {{baseUrl}}/announcements/1
+Content-Type: application/json
+
+###
+
+### DELETE /announcements/:id — неіснуючий ID → 404
+DELETE {{baseUrl}}/announcements/99999
+Content-Type: application/json
