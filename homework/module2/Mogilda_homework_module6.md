@@ -79,7 +79,7 @@ echo "Backup created: $ARCHIVE_PATH"
 
 ## Результати тестування
 
-- Нормальний запуск → Backup created: /tmp/test_backup/logs_backup_2026-05-11_12-20.tar.gz ✅
-- Без аргументів → Usage: ./backup.sh <log_dir> <backup_dir> ✅
-- Неіснуючий каталог → Usage: ./backup.sh <log_dir> <backup_dir> ✅
-- Паралельний запуск → Backup already running ✅
+- Нормальний запуск → Backup created: /tmp/test_backup/logs_backup_2026-05-11_12-20.tar.gz 
+- Без аргументів → Usage: ./backup.sh <log_dir> <backup_dir> 
+- Неіснуючий каталог → Usage: ./backup.sh <log_dir> <backup_dir> 
+- Паралельний запуск → Backup already running 
